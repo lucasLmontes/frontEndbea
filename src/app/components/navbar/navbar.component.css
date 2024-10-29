@@ -1,0 +1,21 @@
+nav {
+    background-color: #0066cc;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+  }
+  
+  nav a {
+    color: #fff;
+    margin: 0 15px;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+  
+  nav a:hover {
+    color: #ffcc00;
+  }
+  
+  .active {
+    color: #ffcc00;
+  }
