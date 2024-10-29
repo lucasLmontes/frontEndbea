@@ -1,10 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { EventosService } from '../../services/eventos.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-eventos',
   templateUrl: './eventos.component.html',
-  styleUrl: './eventos.component.css'
+  styleUrls: ['./eventos.component.css']
 })
-export class EventosComponent {
+export class EventosComponent implements OnInit {
+  eventos: any[] = [];
 
+  constructor(private eventosService: EventosService, private router: Router) { }
+
+  ngOnInit(): void {
+    this.eventosService.getEventos().subscribe(data => {
+      this.eventos = data;
+    });
+  }
+
+  verDetalhes(id: string) {
+    this.router.navigate(['/eventos', id]);
+  }
 }

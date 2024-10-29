@@ -1,14 +1,18 @@
-.eventos {
-    padding: 2rem;
-  }
-  
-  .eventos h2 {
-    color: #0066cc;
-    margin-bottom: 1rem;
-  }
-  
-  .eventos p {
-    font-size: 1rem;
-    color: #555;
-  }
-  
+.eventos-lista {
+  padding: 2rem;
+}
+
+.eventos-lista ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.eventos-lista li {
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.eventos-lista li:hover {
+  background-color: #f0f0f0;
+}
