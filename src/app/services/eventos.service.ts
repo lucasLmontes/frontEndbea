@@ -6,15 +6,17 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class EventosService {
-  private apiUrl = 'https://sua-api.com/eventos';
+  private apiUrl = 'http://localhost:8080/api/eventos'; // Atualize aqui para incluir o caminho correto
 
   constructor(private http: HttpClient) { }
 
-  getEventos(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);
+  // Método para obter todos os eventos
+  getEventos(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl);
   }
 
-  getEventoById(id: string): Observable<any> {
+  // Método para obter um evento específico pelo ID
+  getEventoById(id: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
 }

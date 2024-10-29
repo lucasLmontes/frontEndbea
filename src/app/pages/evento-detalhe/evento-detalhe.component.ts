@@ -8,17 +8,20 @@ import { EventosService } from '../../services/eventos.service';
   styleUrls: ['./evento-detalhe.component.css']
 })
 export class EventoDetalheComponent implements OnInit {
-  evento: any;
+  evento: any; // Defina o tipo adequado, se possível
 
   constructor(
-    private route: ActivatedRoute,
-    private eventosService: EventosService
-  ) { }
+    private eventosService: EventosService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.eventosService.getEventoById(id!).subscribe(data => {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.eventosService.getEventoById(id).subscribe(data => {
       this.evento = data;
+    }, error => {
+      console.error('Erro ao buscar evento:', error);
     });
   }
 }
+  

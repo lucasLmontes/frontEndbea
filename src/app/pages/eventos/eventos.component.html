@@ -1,4 +1,5 @@
-<div class="eventos">
-    <h2>Eventos</h2>
-    <p>Explore os eventos organizados pela BEA e participe!</p>
-  </div>
+<div *ngFor="let evento of eventos">
+  <h3>{{ evento.descricao }}</h3>
+  <p>{{ evento.data | date:'shortDate' }}</p>
+  <button (click)="verDetalhes(evento.eventoId)">Ver Detalhes</button>
+</div>

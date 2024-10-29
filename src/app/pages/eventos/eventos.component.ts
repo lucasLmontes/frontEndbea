@@ -13,12 +13,19 @@ export class EventosComponent implements OnInit {
   constructor(private eventosService: EventosService, private router: Router) { }
 
   ngOnInit(): void {
-    this.eventosService.getEventos().subscribe(data => {
-      this.eventos = data;
-    });
+    // A chamada do serviço para obter os eventos
+    this.eventosService.getEventos().subscribe(
+      data => {
+        this.eventos = data; // Armazenar os eventos recebidos
+      },
+      error => {
+        console.error('Erro ao buscar eventos:', error); // Log do erro, se ocorrer
+      }
+    );
   }
 
-  verDetalhes(id: string) {
+  verDetalhes(id: number) {
+    // Navega para a página de detalhes do evento
     this.router.navigate(['/eventos', id]);
   }
 }

@@ -5,8 +5,11 @@ import { SobreComponent } from './pages/sobre/sobre.component';
 import { ParceriasComponent } from './pages/parcerias/parcerias.component';
 import { EventosComponent } from './pages/eventos/eventos.component';
 import { LoginComponent } from './pages/login/login.component';
+import { EventoDetalheComponent } from './pages/evento-detalhe/evento-detalhe.component';
+
 
 const routes: Routes = [
+  { path: 'eventos/:id', component: EventoDetalheComponent },
   { path: 'login', component: LoginComponent },
   { path: 'inicial', component: InicialComponent },
   { path: 'sobre', component: SobreComponent },

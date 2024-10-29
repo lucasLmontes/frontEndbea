@@ -1,7 +1,8 @@
-<div *ngIf="evento" class="evento-detalhe">
-    <h2>{{ evento.nome }}</h2>
-    <p><strong>Data:</strong> {{ evento.data }}</p>
-    <p><strong>Local:</strong> {{ evento.local }}</p>
-    <p><strong>Descrição:</strong> {{ evento.descricao }}</p>
+<div *ngIf="evento">
+    <h2>{{ evento.tituloEvento }}</h2>
+    <p>{{ evento.descricao }}</p>
+    <p><strong>Data:</strong> {{ evento.data | date:'shortDate' }}</p>
+    <p><strong>Endereço:</strong> {{ evento.endereco }}</p>
+    <img [src]="evento.thumbnail" alt="{{ evento.tituloEvento }}" />
   </div>
   
