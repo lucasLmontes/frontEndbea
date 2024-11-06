@@ -1,0 +1,18 @@
+<div class="register-container">
+    <h2>Registrar</h2>
+    <form (submit)="onRegister()">
+        <label for="name">Nome</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="password">Senha</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="confirmPassword">Confirmar Senha</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" required>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+</div>

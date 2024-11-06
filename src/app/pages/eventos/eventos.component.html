@@ -1,5 +1,9 @@
-<div *ngFor="let evento of eventos">
-  <h3>{{ evento.descricao }}</h3>
-  <p>{{ evento.data | date:'shortDate' }}</p>
-  <button (click)="verDetalhes(evento.eventoId)">Ver Detalhes</button>
+<div class="container">
+  <h1>Eventos</h1>
+  <div *ngFor="let evento of eventos" class="card">
+    <h3>{{ evento.tituloEvento }}</h3>
+    <p class="data">{{ evento.data | date: 'shortDate' }}</p>
+    <p>{{ evento.descricao }}</p>
+    <button class="button" (click)="verDetalhes(evento.eventoId)">Ver Detalhes</button>
+  </div>
 </div>
