@@ -1,4 +1,5 @@
 <div class="container">
+  <!-- Detalhes do evento -->
   <div class="evento-detalhe" *ngIf="evento; else loading">
     <h2>{{ evento?.tituloEvento }}</h2>
     <p><strong>Data:</strong> {{ evento?.data | date:'fullDate' }}</p>
@@ -7,6 +8,7 @@
     <img *ngIf="evento?.thumbnail" [src]="evento?.thumbnail" alt="{{ evento?.tituloEvento }}" />
   </div>
 
+  <!-- Feedbacks do evento -->
   <div class="feedbacks" *ngIf="!erroFeedbacks">
     <h3>Feedbacks</h3>
     <div *ngIf="feedbacks.length > 0">
@@ -20,6 +22,36 @@
     </div>
   </div>
 
+  <!-- Atrações do evento -->
+  <div class="atracoes" *ngIf="!erroAtracoes">
+    <h3>Atrações</h3>
+    <div *ngIf="atracoes.length > 0">
+      <div *ngFor="let atracao of atracoes" class="atracao-card">
+        <p><strong>{{ atracao.texto }}</strong></p>
+        <p><strong>Data de Início:</strong> {{ atracao.dataInicio | date:'short' }}</p>
+        <p><strong>Data de Fim:</strong> {{ atracao.dataFim | date:'short' }}</p>
+      </div>
+    </div>
+    <div *ngIf="atracoes.length === 0">
+      <p>Não há atrações para este evento ainda.</p>
+    </div>
+  </div>
+
+  <!-- Imagens do evento -->
+  <div class="imagens" *ngIf="!erroImagens">
+    <h3>Imagens</h3>
+    <div *ngIf="imagens.length > 0">
+      <div *ngFor="let imagem of imagens" class="imagem-card">
+        <p><strong>{{ imagem.legenda }}</strong></p>
+        <img *ngIf="imagem.formato" [src]="imagem.formato" alt="{{ imagem.legenda }}" />
+      </div>
+    </div>
+    <div *ngIf="imagens.length === 0">
+      <p>Não há imagens para este evento ainda.</p>
+    </div>
+  </div>
+
+  <!-- Carregando -->
   <ng-template #loading>
     <p>Carregando detalhes do evento...</p>
   </ng-template>

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { EventosService } from '../../services/eventos.service';
-import { FeedbackService } from '../../services/feedback/feedback.service'; // Serviço de feedbacks
+import { EventosService } from '../../services/eventos/eventos.service';
+import { FeedbackService } from '../../services/feedback/feedback.service';
+import { AtracoesService } from '../../services/atracoes/atracoes.service';
+import { ImagensService } from '../../services/imagens/imagens.service';
 
 @Component({
   selector: 'app-evento-detalhe',
@@ -9,47 +11,79 @@ import { FeedbackService } from '../../services/feedback/feedback.service'; // S
   styleUrls: ['./evento-detalhe.component.css']
 })
 export class EventoDetalheComponent implements OnInit {
-  evento: any; // Detalhes do evento
-  feedbacks: any[] = []; // Feedbacks associados ao evento
-  erroEvento: boolean = false; // Flag de erro para o evento
-  erroFeedbacks: boolean = false; // Flag de erro para os feedbacks
-  loadingEvento: boolean = true; // Flag de carregamento do evento
-  loadingFeedbacks: boolean = true; // Flag de carregamento dos feedbacks
+  evento: any;
+  feedbacks: any[] = [];
+  atracoes: any[] = [];
+  imagens: any[] = [];
+  erroEvento: boolean = false;
+  erroFeedbacks: boolean = false;
+  erroAtracoes: boolean = false;
+  erroImagens: boolean = false;
+  loadingEvento: boolean = true;
+  loadingFeedbacks: boolean = true;
+  loadingAtracoes: boolean = true;
+  loadingImagens: boolean = true;
 
   constructor(
     private eventosService: EventosService,
-    private feedbackService: FeedbackService, // Injetando o serviço de feedbacks
+    private feedbackService: FeedbackService,
+    private atracoesService: AtracoesService,
+    private imagensService: ImagensService,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
-    // Carregar os detalhes do evento
     this.eventosService.getEventoById(id).subscribe(
       (data) => {
         this.evento = data;
-        this.erroEvento = false; // Caso a requisição seja bem-sucedida, remove o erro
-        this.loadingEvento = false; // Finaliza o carregamento do evento
+        this.erroEvento = false;
+        this.loadingEvento = false;
       },
       (error) => {
         console.error('Erro ao buscar evento:', error);
-        this.erroEvento = true; // Marca que houve um erro ao carregar o evento
-        this.loadingEvento = false; // Finaliza o carregamento do evento
+        this.erroEvento = true;
+        this.loadingEvento = false;
       }
     );
 
-    // Carregar os feedbacks para o evento
     this.feedbackService.getFeedbackByEvento(id).subscribe(
       (data) => {
         this.feedbacks = data;
-        this.erroFeedbacks = false; // Caso a requisição seja bem-sucedida, remove o erro
-        this.loadingFeedbacks = false; // Finaliza o carregamento dos feedbacks
+        this.erroFeedbacks = false;
+        this.loadingFeedbacks = false;
       },
       (error) => {
         console.error('Erro ao buscar feedbacks:', error);
-        this.erroFeedbacks = true; // Marca que houve um erro ao carregar os feedbacks
-        this.loadingFeedbacks = false; // Finaliza o carregamento dos feedbacks
+        this.erroFeedbacks = true;
+        this.loadingFeedbacks = false;
+      }
+    );
+
+    this.atracoesService.getAtracoesByEvento(id).subscribe(
+      (data) => {
+        this.atracoes = data;
+        this.erroAtracoes = false;
+        this.loadingAtracoes = false;
+      },
+      (error) => {
+        console.error('Erro ao buscar atrações:', error);
+        this.erroAtracoes = true;
+        this.loadingAtracoes = false;
+      }
+    );
+
+    this.imagensService.getImagensByEvento(id).subscribe(
+      (data) => {
+        this.imagens = data;
+        this.erroImagens = false;
+        this.loadingImagens = false;
+      },
+      (error) => {
+        console.error('Erro ao buscar imagens:', error);
+        this.erroImagens = true;
+        this.loadingImagens = false;
       }
     );
   }

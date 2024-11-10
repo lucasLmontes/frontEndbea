@@ -5,12 +5,16 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ParceriasService {
-  private apiUrl = 'http://localhost:8080/api/parcerias';
+export class EventosService {
+  private apiUrl = 'http://localhost:8080/api/eventos';
 
   constructor(private http: HttpClient) { }
 
-  getParcerias(): Observable<any[]> {
+  getEventos(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
+  }
+
+  getEventoById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
 }
