@@ -1,10 +1,26 @@
 <div class="container">
-    <div class="evento-detalhe">
-      <h2>{{ evento.tituloEvento }}</h2>
-      <p><strong>Data:</strong> {{ evento.data | date:'fullDate' }}</p>
-      <p><strong>Endereço:</strong> {{ evento.endereco }}</p>
-      <p><strong>Descrição:</strong> {{ evento.descricao }}</p>
-      <img [src]="evento.thumbnail" alt="{{ evento.tituloEvento }}" />
+  <div class="evento-detalhe" *ngIf="evento; else loading">
+    <h2>{{ evento?.tituloEvento }}</h2>
+    <p><strong>Data:</strong> {{ evento?.data | date:'fullDate' }}</p>
+    <p><strong>Endereço:</strong> {{ evento?.endereco }}</p>
+    <p><strong>Descrição:</strong> {{ evento?.descricao }}</p>
+    <img *ngIf="evento?.thumbnail" [src]="evento?.thumbnail" alt="{{ evento?.tituloEvento }}" />
+  </div>
+
+  <div class="feedbacks" *ngIf="!erroFeedbacks">
+    <h3>Feedbacks</h3>
+    <div *ngIf="feedbacks.length > 0">
+      <div *ngFor="let feedback of feedbacks" class="feedback-card">
+        <p><strong>{{ feedback.autor?.nome }}</strong> - {{ feedback.dataCriacao | date:'short' }}</p>
+        <p>{{ feedback.texto }}</p>
+      </div>
+    </div>
+    <div *ngIf="feedbacks.length === 0">
+      <p>Não há feedbacks para este evento ainda.</p>
     </div>
   </div>
-  
+
+  <ng-template #loading>
+    <p>Carregando detalhes do evento...</p>
+  </ng-template>
+</div>

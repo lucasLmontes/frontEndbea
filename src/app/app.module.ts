@@ -11,7 +11,7 @@ import { ParceriasComponent } from './pages/parcerias/parcerias.component';
 import { EventosComponent } from './pages/eventos/eventos.component';
 import { LoginComponent } from './pages/login/login.component';
 import { EventoDetalheComponent } from './pages/evento-detalhe/evento-detalhe.component';
-import { CadastroComponent } from './cadastro/cadastro.component';
+import { CadastroComponent } from './pages/cadastro/cadastro.component';
 
 @NgModule({
   declarations: [

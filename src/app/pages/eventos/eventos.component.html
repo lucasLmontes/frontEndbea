@@ -4,6 +4,16 @@
     <h3>{{ evento.tituloEvento }}</h3>
     <p class="data">{{ evento.data | date: 'shortDate' }}</p>
     <p>{{ evento.descricao }}</p>
+    
+    <!-- Exibindo feedbacks do evento -->
+    <div *ngIf="evento.feedbacks && evento.feedbacks.length > 0" class="feedbacks">
+      <h4>Feedbacks:</h4>
+      <div *ngFor="let feedback of evento.feedbacks" class="feedback-card">
+        <p><strong>{{ feedback.autor.nome }}</strong> - {{ feedback.dataCriacao | date: 'short' }}</p>
+        <p>{{ feedback.texto }}</p>
+      </div>
+    </div>
+    
     <button class="button" (click)="verDetalhes(evento.eventoId)">Ver Detalhes</button>
   </div>
 </div>
