@@ -1,4 +1,27 @@
-/* evento-detalhe.component.css */
+.btn {
+  background-color: lightgray;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  margin-right: 35rem;
+  margin-top: 15px;
+}
+
+.btn a {
+  text-decoration: none;
+  color: black
+}
+
+.btn:hover {
+  background-color: gray;
+}
 
 .container {
     display: flex;
@@ -32,7 +55,6 @@
     border-radius: 8px;
     margin-top: 15px;
   }
-/* evento-detalhe.component.css */
 
 .container {
     display: flex;

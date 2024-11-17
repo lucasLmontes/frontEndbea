@@ -1,6 +1,5 @@
-// parcerias.component.ts
 import { Component, OnInit } from '@angular/core';
-import { ParceriasService } from '../../services/parcerias/parcerias.service';  // Importando o serviço
+import { ParceriasService } from '../../services/parcerias/parcerias.service';
 
 @Component({
   selector: 'app-parcerias',
@@ -13,10 +12,9 @@ export class ParceriasComponent implements OnInit {
   constructor(private parceriasService: ParceriasService) { }
 
   ngOnInit(): void {
-    // Chama o serviço para buscar as parcerias
     this.parceriasService.getParcerias().subscribe(
       (data) => {
-        this.parcerias = data;  // Armazena as parcerias recebidas
+        this.parcerias = data;
       },
       (error) => {
         console.error('Erro ao buscar parcerias:', error);

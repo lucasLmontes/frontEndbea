@@ -4,7 +4,6 @@
     box-sizing: border-box;
   }
   
-  /* Configura o layout principal */
   body, html {
     font-family: Arial, sans-serif;
     display: flex;
@@ -18,7 +17,6 @@
     flex-direction: column;
   }
   
-  /* Estilos gerais para links */
   a {
     color: #333;
     text-decoration: none;

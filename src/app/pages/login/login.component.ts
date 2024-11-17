@@ -13,10 +13,9 @@ export class LoginComponent {
   constructor(private router: Router) {}
 
   onLogin() {
-    // Implementar a lógica de autenticação aqui
     if (this.email === 'user@example.com' && this.password === 'password') {
       alert('Login bem-sucedido!');
-      this.router.navigate(['/inicial']); // Redireciona para a página inicial após o login
+      this.router.navigate(['/inicial']);
     } else {
       alert('Credenciais inválidas.');
     }

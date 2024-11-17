@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { EventosService } from '../../services/eventos/eventos.service';
 import { FeedbackService } from '../../services/feedback/feedback.service';
 import { AtracoesService } from '../../services/atracoes/atracoes.service';
-import { ImagensService } from '../../services/imagens/imagens.service';
 
 @Component({
   selector: 'app-evento-detalhe',
@@ -14,21 +13,19 @@ export class EventoDetalheComponent implements OnInit {
   evento: any;
   feedbacks: any[] = [];
   atracoes: any[] = [];
-  imagens: any[] = [];
   erroEvento: boolean = false;
   erroFeedbacks: boolean = false;
   erroAtracoes: boolean = false;
-  erroImagens: boolean = false;
   loadingEvento: boolean = true;
   loadingFeedbacks: boolean = true;
   loadingAtracoes: boolean = true;
-  loadingImagens: boolean = true;
+
+  localImageUrl: string = 'assets/public/';
 
   constructor(
     private eventosService: EventosService,
     private feedbackService: FeedbackService,
     private atracoesService: AtracoesService,
-    private imagensService: ImagensService,
     private route: ActivatedRoute
   ) {}
 
@@ -71,19 +68,6 @@ export class EventoDetalheComponent implements OnInit {
         console.error('Erro ao buscar atrações:', error);
         this.erroAtracoes = true;
         this.loadingAtracoes = false;
-      }
-    );
-
-    this.imagensService.getImagensByEvento(id).subscribe(
-      (data) => {
-        this.imagens = data;
-        this.erroImagens = false;
-        this.loadingImagens = false;
-      },
-      (error) => {
-        console.error('Erro ao buscar imagens:', error);
-        this.erroImagens = true;
-        this.loadingImagens = false;
       }
     );
   }
