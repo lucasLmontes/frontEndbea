@@ -1,9 +1,31 @@
 <div class="container">
-  <h1>Eventos</h1>
-  <div *ngFor="let evento of eventos" class="card">
-    <h3>{{ evento.tituloEvento }}</h3>
-    <p class="data">{{ evento.data | date: 'shortDate' }}</p>
-    <p>{{ evento.descricao }}</p>
-    <button class="button" (click)="verDetalhes(evento.eventoId)">Ver Detalhes</button>
-  </div>
+  <h2>Lista de Eventos</h2>
+  <button class="btn btn-primary mb-3" (click)="irParaCadastro()">Novo Evento</button>
+  <table class="table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Título</th>
+        <th>Data</th>
+        <th>Descrição</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let evento of eventos" class="card">
+        <td><button class="button" (click)="verDetalhes(evento.eventoId)">Ver Detalhes</button></td>
+        <td>{{ evento.tituloEvento }}</td>
+        <td>{{ evento.data | date: 'shortDate' }}</td>
+        <td>{{ evento.descricao }}</td>
+        <td class="action-buttons">
+          <button class="btn btn-warning" (click)="editarEvento(evento)">
+            <img src="assets/public/pencil.png" alt="Editar" />
+          </button>
+          <button class="btn btn-danger" (click)="deletarEvento(evento.eventoId)">
+            <img src="assets/public/trash.png" alt="Excluir" />
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

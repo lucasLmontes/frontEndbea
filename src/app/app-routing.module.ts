@@ -6,9 +6,11 @@ import { ParceriasComponent } from './pages/parcerias/parcerias.component';
 import { EventosComponent } from './pages/eventos/eventos.component';
 import { LoginComponent } from './pages/login/login.component';
 import { EventoDetalheComponent } from './pages/evento-detalhe/evento-detalhe.component';
+import { CadastroEventoComponent } from './pages/cadastro-evento/cadastro-evento.component';
 
 
 const routes: Routes = [
+  { path: 'cadastro-evento', component: CadastroEventoComponent },
   { path: 'eventos/:id', component: EventoDetalheComponent },
   { path: 'login', component: LoginComponent },
   { path: 'inicial', component: InicialComponent },

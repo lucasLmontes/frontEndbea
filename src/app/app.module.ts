@@ -12,6 +12,8 @@ import { EventosComponent } from './pages/eventos/eventos.component';
 import { LoginComponent } from './pages/login/login.component';
 import { EventoDetalheComponent } from './pages/evento-detalhe/evento-detalhe.component';
 import { CadastroComponent } from './pages/cadastro/cadastro.component';
+import { CadastroEventoComponent } from './pages/cadastro-evento/cadastro-evento.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,10 +26,12 @@ import { CadastroComponent } from './pages/cadastro/cadastro.component';
     EventosComponent,
     LoginComponent,
     EventoDetalheComponent,
-    CadastroComponent
+    CadastroComponent,
+    CadastroEventoComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     HttpClientModule,
   ],

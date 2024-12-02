@@ -3,7 +3,7 @@
   <div class="evento-detalhe" *ngIf="evento; else loading">
     <h2>{{ evento?.tituloEvento }}</h2>
     <p><strong>Data:</strong> {{ evento?.data | date:'fullDate' }}</p>
-    <p><strong>Endereço:</strong> {{ evento?.endereco }}</p>
+    <p><strong>Endereço:</strong> {{ evento?.endereco }} - Cep: {{ evento?.cep }}</p>
     <p><strong>Descrição:</strong> {{ evento?.descricao }}</p>
   </div>
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { EventosService } from '../../services/eventos/eventos.service';
 import { Router } from '@angular/router';
+import { EventosService } from '../../services/eventos/eventos.service';
 
 @Component({
   selector: 'app-eventos',
@@ -10,20 +10,43 @@ import { Router } from '@angular/router';
 export class EventosComponent implements OnInit {
   eventos: any[] = [];
 
-  constructor(private eventosService: EventosService, private router: Router) { }
+  constructor(private eventosService: EventosService, private router: Router) {}
 
   ngOnInit(): void {
-    this.eventosService.getEventos().subscribe(
-      data => {
-        this.eventos = data;
-      },
-      error => {
-        console.error('Erro ao buscar eventos:', error);
-      }
-    );
+    this.carregarEventos();
   }
 
   verDetalhes(id: number) {
     this.router.navigate(['/eventos', id]);
+  }
+
+  carregarEventos() {
+    this.eventosService.getEventos().subscribe(
+      (data) => {
+        this.eventos = data;
+      },
+      (error) => {
+        console.error('Erro ao carregar eventos:', error);
+      }
+    );
+  }
+
+  irParaCadastro() {
+    this.router.navigate(['/cadastro-evento']);
+  }
+
+  editarEvento(evento: any) {
+    this.router.navigate(['/cadastro-evento'], { state: { evento } });
+  }
+
+  deletarEvento(id: number) {
+    this.eventosService.deleteEvento(id).subscribe(
+      () => {
+        this.carregarEventos();
+      },
+      (error) => {
+        console.error('Erro ao deletar evento:', error);
+      }
+    );
   }
 }

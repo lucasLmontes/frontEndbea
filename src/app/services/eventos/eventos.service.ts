@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class EventosService {
   private apiUrl = 'http://localhost:8080/api/eventos';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getEventos(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
@@ -16,5 +16,17 @@ export class EventosService {
 
   getEventoById(id: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${id}`);
+  }
+
+  createEvento(evento: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl, evento);
+  }
+
+  updateEvento(id: number, evento: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${id}`, evento);
+  }
+
+  deleteEvento(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
