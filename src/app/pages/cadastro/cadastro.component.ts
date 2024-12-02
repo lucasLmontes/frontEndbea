@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { UsuarioService, Usuario } from '../../services/usuario/usuario.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -7,21 +7,37 @@ import { Router } from '@angular/router';
   styleUrls: ['./cadastro.component.css']
 })
 export class CadastroComponent {
-  name: string = '';
+  nome: string = '';
   email: string = '';
-  password: string = '';
+  senha: string = '';
   confirmPassword: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private usuarioService: UsuarioService) {}
 
   onRegister() {
-    if (this.password !== this.confirmPassword) {
+    if (this.senha !== this.confirmPassword) {
       alert('As senhas não coincidem.');
       return;
     }
-
-    alert(`Registro bem-sucedido!\nNome: ${this.name}\nEmail: ${this.email}`);
-
-    this.router.navigate(['/login']);
+  
+    const usuario: Usuario = {
+      nome: this.nome,
+      email: this.email,
+      senha: this.senha,
+    };
+  
+    console.log('Usuário a ser enviado:', usuario);
+  
+    this.usuarioService.createUsuario(usuario).subscribe({
+      next: (res) => {
+        alert('Usuário registrado com sucesso!');
+      },
+      error: (err) => {
+        console.error('Erro ao registrar o usuário:', err);
+        alert(`Ocorreu um erro. Tente novamente. Detalhes: ${err.message || err.error.message}`);
+      },
+    });
   }
+  
+  
 }
