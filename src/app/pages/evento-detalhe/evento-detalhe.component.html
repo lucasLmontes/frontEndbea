@@ -1,42 +1,54 @@
 <div class="container">
-
   <div class="evento-detalhe" *ngIf="evento; else loading">
     <h2>{{ evento?.tituloEvento }}</h2>
     <p><strong>Data:</strong> {{ evento?.data | date:'fullDate' }}</p>
-    <p><strong>Endereço:</strong> {{ evento?.endereco }} - Cep: {{ evento?.cep }}</p>
+    <p><strong>Endereço:</strong> {{ evento?.endereco }} - CEP: {{ evento?.cep }}</p>
     <p><strong>Descrição:</strong> {{ evento?.descricao }}</p>
   </div>
 
-  <div class="feedbacks" *ngIf="!erroFeedbacks">
+  <div *ngIf="feedbacks.length > 0; else semFeedbacks">
     <h3>Feedbacks</h3>
-    <div *ngIf="feedbacks.length > 0">
-      <div *ngFor="let feedback of feedbacks" class="feedback-card">
-        <p><strong>{{ feedback.autor?.nome }}</strong> - {{ feedback.dataCriacao | date:'short' }}</p>
-        <p>{{ feedback.texto }}</p>
-      </div>
-    </div>
-    <div *ngIf="feedbacks.length === 0">
-      <p>Não há feedbacks para este evento ainda.</p>
-    </div>
+    <ul>
+      <li *ngFor="let feedback of feedbacks">
+        <strong>{{ feedback.texto }}</strong> (ID: {{ feedback.id }})
+      </li>
+    </ul>
   </div>
 
-  <div class="atracoes" *ngIf="!erroAtracoes">
+  <ng-template #semFeedbacks>
+    <p>Nenhum feedback cadastrado para este evento.</p>
+  </ng-template>
+
+  <div *ngIf="atracoes.length > 0; else semAtracoes">
     <h3>Atrações</h3>
-    <div *ngIf="atracoes.length > 0">
-      <div *ngFor="let atracao of atracoes" class="atracao-card">
-        <p><strong>{{ atracao.texto }}</strong></p>
-        <p><strong>Data de Início:</strong> {{ atracao.dataInicio | date:'short' }}</p>
-        <p><strong>Data de Fim:</strong> {{ atracao.dataFim | date:'short' }}</p>
-      </div>
-    </div>
-    <div *ngIf="atracoes.length === 0">
-      <p>Não há atrações para este evento ainda.</p>
-    </div>
+    <ul>
+      <li *ngFor="let atracao of atracoes">
+        <strong>{{ atracao.texto }}</strong> 
+        <span>(Início: {{ atracao.dataInicio | date:'short' }}, Fim: {{ atracao.dataFim | date:'short' }})</span>
+      </li>
+    </ul>
+  </div>
+  
+  <ng-template #semAtracoes>
+    <p>Nenhuma atração cadastrada para este evento.</p>
+  </ng-template>  
+
+  <div class="links">
+    <button class="btn" (click)="abrirModalFeedback()">Cadastrar Feedback</button>
+    <button class="btn" (click)="abrirModalAtracao()">Cadastrar Atração</button>
   </div>
 
-  <button class="btn">
-    <a routerLink="/eventos">Voltar</a>
-  </button>
+  <app-modal-feedback
+    *ngIf="exibirModalFeedback"
+    (fechar)="fecharModalFeedback()"
+    [eventoId]="evento?.id">
+  </app-modal-feedback>
+
+  <app-modal-atracao
+    *ngIf="exibirModalAtracao"
+    (fechar)="fecharModalAtracao()"
+    [eventoId]="evento?.id">
+  </app-modal-atracao>
 
   <ng-template #loading>
     <p>Carregando detalhes do evento...</p>

@@ -1,0 +1,40 @@
+<div class="modal">
+    <h3>{{ atracaoEditando ? 'Editar Atração' : 'Cadastrar Atração' }}</h3>
+    
+    <textarea [(ngModel)]="atracaoTexto" placeholder="Escreva a descrição da atração"></textarea>
+    
+    <input
+      type="datetime-local"
+      [(ngModel)]="dataInicio"
+      placeholder="Data de Início"
+    />
+    
+    <input
+      type="datetime-local"
+      [(ngModel)]="dataFim"
+      placeholder="Data de Fim"
+    />
+    
+    <button (click)="salvarAtracao()">
+      {{ atracaoEditando ? 'Atualizar' : 'Salvar' }}
+    </button>
+    
+    <button *ngIf="atracaoEditando" (click)="cancelarEdicao()">Cancelar Edição</button>
+    
+    <button (click)="fechar.emit()">Fechar</button>
+  
+    <h3>Atrações Cadastradas</h3>
+    
+    <ul>
+      <li *ngFor="let atracao of atracoes">
+        <span>
+          {{ atracao.texto }} 
+          ({{ atracao.dataInicio | date: 'short' }} - {{ atracao.dataFim | date: 'short' }})
+        </span>
+        
+        <button (click)="excluirAtracao(atracao.id)">Excluir</button>
+        <button (click)="editarAtracao(atracao)" class="btn btn-primary">Editar</button>
+      </li>
+    </ul>
+  </div>
+  

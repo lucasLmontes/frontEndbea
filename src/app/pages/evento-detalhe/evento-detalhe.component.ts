@@ -16,11 +16,8 @@ export class EventoDetalheComponent implements OnInit {
   erroEvento: boolean = false;
   erroFeedbacks: boolean = false;
   erroAtracoes: boolean = false;
-  loadingEvento: boolean = true;
-  loadingFeedbacks: boolean = true;
-  loadingAtracoes: boolean = true;
-
-  localImageUrl: string = 'assets/public/';
+  exibirModalFeedback: boolean = false;
+  exibirModalAtracao: boolean = false;
 
   constructor(
     private eventosService: EventosService,
@@ -30,45 +27,69 @@ export class EventoDetalheComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+    const id = this.route.snapshot.paramMap.get('id');
 
+    if (id) {
+      this.carregarEvento(Number(id));
+      this.carregarFeedbacks(Number(id));
+      this.carregarAtracoes(Number(id));
+    } else {
+      console.error('ID do evento não encontrado.');
+    }
+  }
+
+  carregarEvento(id: number): void {
     this.eventosService.getEventoById(id).subscribe(
       (data) => {
         this.evento = data;
         this.erroEvento = false;
-        this.loadingEvento = false;
       },
       (error) => {
         console.error('Erro ao buscar evento:', error);
         this.erroEvento = true;
-        this.loadingEvento = false;
       }
     );
+  }
 
+  carregarFeedbacks(id: number): void {
     this.feedbackService.getFeedbackByEvento(id).subscribe(
       (data) => {
         this.feedbacks = data;
         this.erroFeedbacks = false;
-        this.loadingFeedbacks = false;
       },
       (error) => {
         console.error('Erro ao buscar feedbacks:', error);
         this.erroFeedbacks = true;
-        this.loadingFeedbacks = false;
       }
     );
+  }
 
+  carregarAtracoes(id: number): void {
     this.atracoesService.getAtracoesByEvento(id).subscribe(
       (data) => {
         this.atracoes = data;
         this.erroAtracoes = false;
-        this.loadingAtracoes = false;
       },
       (error) => {
         console.error('Erro ao buscar atrações:', error);
         this.erroAtracoes = true;
-        this.loadingAtracoes = false;
       }
     );
+  }  
+
+  abrirModalFeedback(): void {
+    this.exibirModalFeedback = true;
+  }
+
+  fecharModalFeedback(): void {
+    this.exibirModalFeedback = false;
+  }
+
+  abrirModalAtracao(): void {
+    this.exibirModalAtracao = true;
+  }
+
+  fecharModalAtracao(): void {
+    this.exibirModalAtracao = false;
   }
 }

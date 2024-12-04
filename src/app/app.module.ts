@@ -9,11 +9,12 @@ import { InicialComponent } from './pages/inicial/inicial.component';
 import { SobreComponent } from './pages/sobre/sobre.component';
 import { ParceriasComponent } from './pages/parcerias/parcerias.component';
 import { EventosComponent } from './pages/eventos/eventos.component';
-import { LoginComponent } from './pages/login/login.component';
-import { EventoDetalheComponent } from './pages/evento-detalhe/evento-detalhe.component';
 import { CadastroComponent } from './pages/cadastro/cadastro.component';
 import { CadastroEventoComponent } from './pages/cadastro-evento/cadastro-evento.component';
 import { FormsModule } from '@angular/forms';
+import { EventoDetalheComponent } from './pages/evento-detalhe/evento-detalhe.component';
+import { FeedbackModalComponent } from './pages/feedback-modal/feedback-modal.component';
+import { ModalAtracaoComponent } from './pages/modal-atracao/modal-atracao.component';
 
 @NgModule({
   declarations: [
@@ -24,10 +25,11 @@ import { FormsModule } from '@angular/forms';
     SobreComponent,
     ParceriasComponent,
     EventosComponent,
-    LoginComponent,
-    EventoDetalheComponent,
     CadastroComponent,
-    CadastroEventoComponent
+    CadastroEventoComponent,
+    EventoDetalheComponent,
+    FeedbackModalComponent,
+    ModalAtracaoComponent
   ],
   imports: [
     BrowserModule,

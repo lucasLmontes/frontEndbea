@@ -1,0 +1,15 @@
+<div class="modal">
+  <h3>Cadastrar Feedback</h3>
+  <textarea [(ngModel)]="feedbackTexto" placeholder="Escreva seu feedback"></textarea>
+  <button (click)="salvarFeedback()">Salvar</button>
+  <button (click)="fechar.emit()">Cancelar</button>
+
+  <h3>Feedbacks Cadastrados</h3>
+  <ul>
+    <li *ngFor="let feedback of feedbacks">
+      <span>{{ feedback.texto }}</span>
+      <button (click)="excluirFeedback(feedback.id)">Excluir</button>
+      <button (click)="editarFeedback(feedback)" class="btn btn-primary">Editar</button>
+    </li>
+  </ul>
+</div>

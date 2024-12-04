@@ -39,14 +39,9 @@ export class EventosComponent implements OnInit {
     this.router.navigate(['/cadastro-evento'], { state: { evento } });
   }
 
-  deletarEvento(id: number) {
-    this.eventosService.deleteEvento(id).subscribe(
-      () => {
-        this.carregarEventos();
-      },
-      (error) => {
-        console.error('Erro ao deletar evento:', error);
-      }
-    );
+  deletarEvento(id: number): void {
+    if (confirm('Deseja realmente excluir este aluno?')) {
+      this.eventosService.deleteEvento(id).subscribe(() => this.carregarEventos());
+    }
   }
 }
